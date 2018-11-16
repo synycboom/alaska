@@ -1,0 +1,109 @@
+{
+  "new-courses": [
+
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Nulla ornare augue id lorem porttitor auctor" 
+    },
+    {
+      "id": 2,
+      "name": "Sed in eros viverra, venenatis arcu a, tristique tortor" 
+    },
+    {
+      "id": 3,
+      "name": "Duis sit amet felis quis urna feugiat sodales id non tortor." 
+    },
+    {
+      "id": 4,
+      "name": "Sed sit amet felis lobortis, scelerisque ex quis, efficitur dolor." 
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "image": "https://picsum.photos/200/100/?image=201&gravity=center",
+      "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      "price": "THB10,000",
+      "category": 1
+    },
+    {
+      "id": 2,
+      "image": "https://picsum.photos/200/100/?image=202",
+      "name": "Nulla ornare ante a lorem venenatis interdum",
+      "price": "THB3,200",
+      "category": 1
+    },
+    {
+      "id": 3,
+      "image": "https://picsum.photos/200/100/?image=203",
+      "name": "Mauris ornare erat non risus vulputate, eu porta arcu sollicitudin",
+      "price": "THB700",
+      "category": 1
+    },
+    {
+      "id": 4,
+      "image": "https://picsum.photos/200/100/?image=204",
+      "name": "Vestibulum convallis purus eu massa posuere viverra",
+      "price": "THB9,000",
+      "category": 1
+    },
+    {
+      "id": 5,
+      "image": "https://picsum.photos/200/100/?image=205",
+      "name": "Sed auctor ipsum non diam iaculis, sed volutpat enim dictum",
+      "price": "THB1,250",
+      "category": 2
+    },
+    {
+      "id": 6,
+      "image": "https://picsum.photos/200/100/?image=206",
+      "name": "Nam non leo nec nunc blandit mollis et vel nibh",
+      "price": "THB6,500",
+      "category": 2
+    },
+    {
+      "id": 7,
+      "image": "https://picsum.photos/200/100/?image=207",
+      "name": "Cras dictum sapien id hendrerit fermentum",
+      "price": "THB3,000",
+      "category": 2
+    },
+    {
+      "id": 8,
+      "image": "https://picsum.photos/200/100/?image=208",
+      "name": "Duis eget diam a nisi finibus accumsan in eget eros",
+      "price": "THB4,000",
+      "category": 2
+    },
+    {
+      "id": 9,
+      "image": "https://picsum.photos/200/100/?image=209",
+      "name": "Sed pulvinar nunc vitae justo bibendum auctor",
+      "price": "THB300",
+      "category": 2
+    },
+    {
+      "id": 10,
+      "image": "https://picsum.photos/200/100/?image=210&gravity=center",
+      "name": "Proin pretium risus sed massa facilisis sodales",
+      "price": "THB100",
+      "category": 2
+    },
+    {
+      "id": 11,
+      "image": "https://picsum.photos/200/100/?image=211&gravity=center",
+      "name": "In ac odio vitae justo vestibulum porta.",
+      "price": "THB999",
+      "category": 3
+    },
+    {
+      "id": 12,
+      "image": "https://picsum.photos/200/100/?image=212&gravity=center",
+      "name": "Praesent auctor arcu eget ipsum fringilla, nec consectetur enim posuere.",
+      "price": "THB888",
+      "category": 4
+    }
+  ]
+}

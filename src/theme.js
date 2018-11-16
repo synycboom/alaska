@@ -53,5 +53,6 @@ export default {
     indicatorBackgroundColor: RED,
     activeTintColor: WHITE,
     inactiveTintColor: WHITE_SMOKE,
+    iconFontSize: FONT_X_LARGE,
   }
 };
