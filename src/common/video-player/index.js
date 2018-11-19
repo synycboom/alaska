@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, Animated, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, Animated, TouchableWithoutFeedback, Dimensions } from 'react-native';
 import Video from 'react-native-video';
-import { View, Spinner } from 'native-base';
+import { View, Spinner, Icon } from 'native-base';
 import Orientation from 'react-native-orientation';
 import { WHITE } from 'Alaska/src/theme';
 import SeekBar from './SeekBar';
@@ -19,8 +19,11 @@ const styles = StyleSheet.create({
   videoCover: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'transparent',
+    // backgroundColor: 'tran',
     ...StyleSheet.absoluteFill,
+  },
+  videoContainer: {
+    overflow: 'hidden'
   },
 });
 
@@ -40,6 +43,8 @@ class VideoPlayer extends React.PureComponent {
 
   componentDidMount() {
     Orientation.addOrientationListener(this.orientationDidChange);
+    // auto hide control panel
+    
   }
 
   componentWillUnmount() {
@@ -95,12 +100,17 @@ class VideoPlayer extends React.PureComponent {
     });
   };
 
-  handleVideoPress = () => {
-    console.log('presssssss')
-    // this.setState(state => ({
-    //   showControl: !state.showControl
-    // }))
+  handleVideoCoverPress = () => {
+    this.setState(state => ({
+      showControl: !state.showControl
+    }))
   };
+  
+  handleVideoIconPress = () => {
+    this.setState(state => ({
+      paused: !state.paused
+    }))
+  }
 
   render() {
     let width = '100%';
@@ -118,13 +128,14 @@ class VideoPlayer extends React.PureComponent {
     } = this.state;
 
     if (orientation === 'PORTRAIT') {
-      width = '80%';
-      height = '30%';
+      let { width: screenWidth } = Dimensions.get("window");
+      width = 0.8 * screenWidth;
+      height = 0.5625 * width;
     }
 
     return (
       <View style={[styles.viewContainer, {width, height}]}>
-        <TouchableWithoutFeedback onPress={this.handleVideoPress}>
+        <View style={styles.videoContainer}>
           <Video
             paused={paused}
             style={styles.video}
@@ -136,20 +147,36 @@ class VideoPlayer extends React.PureComponent {
             onEnd={this.handleEnd}
             ref={ref => { this.player = ref; }}
           />
-        </TouchableWithoutFeedback>
-        <View style={styles.videoCover}>
-          {buffering && <Spinner color={WHITE} />}
+
+          <TouchableWithoutFeedback onPress={this.handleVideoCoverPress}>
+            <View style={styles.videoCover}>
+              {buffering ? (
+                <Spinner color={WHITE} />
+              ) : (
+                showControl && (
+                  <TouchableWithoutFeedback onPress={this.handleVideoIconPress}>
+                    <Icon
+                      name={paused ? 'play' : 'pause'}
+                      type='FontAwesome'
+                      style={{color: WHITE}}
+                    />
+                  </TouchableWithoutFeedback>
+                )
+              )}
+            </View>
+          </TouchableWithoutFeedback>
+
+          {showControl && (
+            <SeekBar
+              paused={paused}
+              progress={progress}
+              duration={duration}
+              onMainButtonTouch={this.handleMainButtonTouch}
+              onSeek={this.handleSeek}
+              onSlidingStart={this.handleSlidingStart}
+            />
+          )}
         </View>
-        {showControl && (
-          <SeekBar
-            paused={paused}
-            progress={progress}
-            duration={duration}
-            onMainButtonTouch={this.handleMainButtonTouch}
-            onSeek={this.handleSeek}
-            onSlidingStart={this.handleSlidingStart}
-          />
-        )}
       </View>
     );
   }
