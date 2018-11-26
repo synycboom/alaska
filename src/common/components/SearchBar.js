@@ -8,15 +8,18 @@ import {
 
 import {
   View, 
-  Container, 
-  Header,
-  Item,
   Icon,
-  Button,
   Text
 } from 'native-base';
 
-import { BORDER_STYLE, FONT_MEDIUM, LIGHT_GREY, BLACK, FONT_LARGER, GREY, DARK_GREY, FONT_X_LARGE, RED } from '../../theme';
+import { 
+  BORDER_STYLE, 
+  FONT_MEDIUM, 
+  LIGHT_GREY, 
+  BLACK, 
+  DARK_GREY, 
+  RED 
+} from '../../theme';
 
 
 const styles = StyleSheet.create({
@@ -71,8 +74,13 @@ export default class Search extends React.PureComponent {
 
   static defaultProps = {
     withFilter: true,
-    onChangeText() {}
+    onCancel() {},
+    onChangeText() {},
   }
+
+  focus = () => {
+    this.ref.focus();
+  };
 
   handleFocus = () => {
     this.setState({ focus: true });
@@ -93,6 +101,7 @@ export default class Search extends React.PureComponent {
   
   handleCancel = () => {
     this.ref.blur();
+    this.props.onCancel();
   };
   
   handleClear = () => {
@@ -109,6 +118,7 @@ export default class Search extends React.PureComponent {
     const {
       withFilter,
       onFilterPress,
+      onSubmitEditing,
     } = this.props;
 
     return (
@@ -120,6 +130,7 @@ export default class Search extends React.PureComponent {
             onChangeText={this.handleChangeText}
             onFocus={this.handleFocus}
             onBlur={this.handleBlur}
+            onSubmitEditing={onSubmitEditing}
             ref={ref => this.ref = ref}
           />
           {showClearButton && (

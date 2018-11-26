@@ -5,6 +5,7 @@ import {
   Header,
   Content,
   Icon,
+  Spinner,
 } from 'native-base';
 
 import CourseService from 'Alaska/src/apis/CourseService';
@@ -29,7 +30,7 @@ class SearchScreen extends React.PureComponent {
   }
 
   state = {
-    isLoading: true,
+    isLoading: false,
     courses: [],
   }
 
@@ -40,19 +41,21 @@ class SearchScreen extends React.PureComponent {
     this.setState({ courses: response.data });
   }
 
-  componentDidMount() {
-    this.fetchData();
-  }
-
   render() {
-    const { courses } = this.state;
+    const { 
+      courses,
+      isLoading
+    } = this.state;
 
     return (
       <Container>
         <Header>
-          <SearchBar />
+          <SearchBar onSubmitEditing={this.fetchData} />
         </Header>
         <Content>
+          {isLoading && (
+            <Spinner />
+          )}
           <CourseList 
             courses={courses}
           />

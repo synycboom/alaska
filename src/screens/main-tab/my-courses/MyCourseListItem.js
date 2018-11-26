@@ -18,14 +18,17 @@ import {
   BLACK, 
   WHITE, 
   FONT_SMALL, 
-  FONT_MEDIUM, 
 } from 'Alaska/src/theme';
+
+import { GREY } from '../../../theme';
+import ProgressBar from './ProgressBar';
 
 const style = StyleSheet.create({
   viewContainer: {
     marginHorizontal: 10,
     marginVertical: 5,
     flexDirection: 'row',
+    alignItems: 'center',
   },
   image: {
     width: 80,
@@ -41,21 +44,25 @@ const style = StyleSheet.create({
     color: BLACK,
     fontSize: FONT_SMALL,
   },
-  textPrice: {
-    color: BLACK,
-    fontSize: FONT_MEDIUM,
-    fontWeight: '400',
-    marginTop: 3,
+  textInstructorName: {
+    color: GREY,
+    fontSize: FONT_SMALL,
+    marginVertical: 5,
   },
+  textPercent: {
+    color: GREY,
+    fontSize: FONT_SMALL,
+    marginVertical: 5,
+  }
 });
 
-class CourseListItem extends React.PureComponent {
+class MyCourseListItem extends React.PureComponent {
   handleOnPress = () => {
-    this.props.navigation.navigate('PurchaseCourse');
+    // this.props.navigation.navigate('PurchaseCourse');
   }
 
   render() {
-    const { image, name, price } = this.props;
+    const { image, name, instructorName, progress } = this.props;
     
     return (
       <TouchableOpacity onPress={this.handleOnPress}>
@@ -63,7 +70,9 @@ class CourseListItem extends React.PureComponent {
           <Image source={{uri: image}} style={style.image} />
           <View style={style.viewRight}>
             <Text numberOfLines={2} style={style.textName}>{name}</Text>
-            <Text style={style.textPrice}>{price}</Text>
+            <Text style={style.textInstructorName}>{instructorName}</Text>
+            <ProgressBar percent={progress}/>
+            <Text style={style.textPercent}>{`${progress}% ` + 'completed'}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -71,4 +80,4 @@ class CourseListItem extends React.PureComponent {
   }
 }
 
-export default withNavigation(CourseListItem);
+export default withNavigation(MyCourseListItem);

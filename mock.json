@@ -26,6 +26,7 @@
       "image": "https://picsum.photos/200/100/?image=201&gravity=center",
       "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
       "price": "THB10,000",
+      "instructor_name": "Anthony Alicea",
       "category": 1
     },
     {
@@ -33,6 +34,7 @@
       "image": "https://picsum.photos/200/100/?image=202",
       "name": "Nulla ornare ante a lorem venenatis interdum",
       "price": "THB3,200",
+      "instructor_name": "Anthony Alicea",
       "category": 1
     },
     {
@@ -40,6 +42,7 @@
       "image": "https://picsum.photos/200/100/?image=203",
       "name": "Mauris ornare erat non risus vulputate, eu porta arcu sollicitudin",
       "price": "THB700",
+      "instructor_name": "Anthony Alicea",
       "category": 1
     },
     {
@@ -47,6 +50,7 @@
       "image": "https://picsum.photos/200/100/?image=204",
       "name": "Vestibulum convallis purus eu massa posuere viverra",
       "price": "THB9,000",
+      "instructor_name": "Anthony Alicea",
       "category": 1
     },
     {
@@ -54,6 +58,7 @@
       "image": "https://picsum.photos/200/100/?image=205",
       "name": "Sed auctor ipsum non diam iaculis, sed volutpat enim dictum",
       "price": "THB1,250",
+      "instructor_name": "Anthony Alicea",
       "category": 2
     },
     {
@@ -61,6 +66,7 @@
       "image": "https://picsum.photos/200/100/?image=206",
       "name": "Nam non leo nec nunc blandit mollis et vel nibh",
       "price": "THB6,500",
+      "instructor_name": "Anthony Alicea",
       "category": 2
     },
     {
@@ -68,6 +74,7 @@
       "image": "https://picsum.photos/200/100/?image=207",
       "name": "Cras dictum sapien id hendrerit fermentum",
       "price": "THB3,000",
+      "instructor_name": "Stephen Grider",
       "category": 2
     },
     {
@@ -75,6 +82,7 @@
       "image": "https://picsum.photos/200/100/?image=208",
       "name": "Duis eget diam a nisi finibus accumsan in eget eros",
       "price": "THB4,000",
+      "instructor_name": "Stephen Grider",
       "category": 2
     },
     {
@@ -82,6 +90,7 @@
       "image": "https://picsum.photos/200/100/?image=209",
       "name": "Sed pulvinar nunc vitae justo bibendum auctor",
       "price": "THB300",
+      "instructor_name": "Stephen Grider",
       "category": 2
     },
     {
@@ -89,6 +98,7 @@
       "image": "https://picsum.photos/200/100/?image=210&gravity=center",
       "name": "Proin pretium risus sed massa facilisis sodales",
       "price": "THB100",
+      "instructor_name": "Stephen Grider",
       "category": 2
     },
     {
@@ -96,6 +106,7 @@
       "image": "https://picsum.photos/200/100/?image=211&gravity=center",
       "name": "In ac odio vitae justo vestibulum porta.",
       "price": "THB999",
+      "instructor_name": "Stephen Grider",
       "category": 3
     },
     {
@@ -103,7 +114,24 @@
       "image": "https://picsum.photos/200/100/?image=212&gravity=center",
       "name": "Praesent auctor arcu eget ipsum fringilla, nec consectetur enim posuere.",
       "price": "THB888",
+      "instructor_name": "Stephen Grider",
       "category": 4
+    }
+  ],
+  "my-courses": [
+    {
+      "id": 1,
+      "image": "https://picsum.photos/200/100/?image=201&gravity=center",
+      "name": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+      "instructor_name": "Anthony Alicea",
+      "progress": 80
+    },
+    {
+      "id": 2,
+      "image": "https://picsum.photos/200/100/?image=202",
+      "name": "Nulla ornare ante a lorem venenatis interdum",
+      "instructor_name": "Stephen Grider",
+      "progress": 15
     }
   ]
 }
