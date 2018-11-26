@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import CourseListItem from './CourseListItem';
 
 class CourseList extends React.PureComponent {
-  keyExtractor = (item, index) => `${item.id}`;
+  keyExtractor = (item) => `${item.id}`;
 
   renderItem = ({item}) => (
     <CourseListItem 
@@ -14,14 +14,13 @@ class CourseList extends React.PureComponent {
   );
 
   render() {
-    const { items } = this.props;
+    const { courses } = this.props;
 
     return (
       <FlatList
-        data={items}
+        data={courses}
         keyExtractor={this.keyExtractor}
         renderItem={this.renderItem}
-        horizontal
       />
     );
   }
