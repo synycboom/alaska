@@ -2,7 +2,7 @@ export const LIGHT_TEAL = '#22ecfd';
 export const TEAL = '#00bcd4';
 export const DARK_TEAL = '#0096aa';
 export const LIGHT_GREEN = '#50e3c2';
-export const RED = 'red';
+export const RED = '#ec5252';
 export const WHITE = 'white';
 export const LIME = '#8bc34a';
 export const WHITE_SMOKE = '#f8feff';
@@ -14,6 +14,7 @@ export const ORANGE = 'orange';
 export const YELLOW = '#ffe756';
 export const BLUE = '#0089ce';
 export const SILVER = '#edf2f5';
+export const ALICE_BLUE = 'aliceblue';
 
 export const FONT_XX_SMALL = 10;
 export const FONT_X_SMALL = 11;

@@ -1,25 +1,35 @@
 import React from 'react';
 import { StyleSheet, Animated, TouchableWithoutFeedback, Dimensions } from 'react-native';
 import Video from 'react-native-video';
-import { View, Spinner, Icon } from 'native-base';
+import { View, Spinner, Icon, Text } from 'native-base';
 import Orientation from 'react-native-orientation';
-import { WHITE } from 'Alaska/src/theme';
+import { WHITE, FONT_SMALLER } from 'Alaska/src/theme';
 import SeekBar from './SeekBar';
 
 // https://www.radiantmediaplayer.com/media/bbb-360p.mp4
 // https://player.vimeo.com/external/206340985.hd.mp4?s=0b055000e30067f11d3e2537bceb7157b47475bc&profile_id=119&oauth2_token_id=57447761
 const styles = StyleSheet.create({
   viewContainer: {
-    position: 'relative'
+    position: 'relative',
+    ...getWidthHeight('80%'),
   },
   video: {
     width: '100%',
     height: '100%',
   },
+  videoError: {
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    ...StyleSheet.absoluteFill,
+  },
+  textError: {
+    color: WHITE,
+    fontSize: FONT_SMALLER,
+    marginTop: 5,
+  },
   videoCover: {
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: 'tran',
     ...StyleSheet.absoluteFill,
   },
   videoContainer: {
@@ -27,15 +37,25 @@ const styles = StyleSheet.create({
   },
 });
 
+export function getWidthHeight(widthInPercent) {
+  const width = parseInt(widthInPercent.replace('%')) / 100;
+
+  return { 
+    width: Dimensions.get('window').width * width,
+    height: Dimensions.get('window').width * width * 0.5625,
+  };
+}
+
 class VideoPlayer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       buffering: true,
-      paused: false,
+      paused: true,
       progress: 0,
       duration: 0,
       showControl: true,
+      error: null,
       orientation: Orientation.getInitialOrientation(),
     };
     this.animated = new Animated.Value(0);
@@ -43,8 +63,6 @@ class VideoPlayer extends React.PureComponent {
 
   componentDidMount() {
     Orientation.addOrientationListener(this.orientationDidChange);
-    // auto hide control panel
-    
   }
 
   componentWillUnmount() {
@@ -52,6 +70,12 @@ class VideoPlayer extends React.PureComponent {
   }
 
   orientationDidChange = (orientation) => {
+    if (orientation === 'LANDSCAPE') {
+      this.player.presentFullscreenPlayer();
+    } else {
+      this.player.dismissFullscreenPlayer();
+    }
+    
     this.setState({
       orientation
     });
@@ -60,6 +84,7 @@ class VideoPlayer extends React.PureComponent {
   handleBuffer = meta => {
     this.setState({
       buffering: meta.isBuffering,
+      error: null
     });
   };
 
@@ -103,21 +128,25 @@ class VideoPlayer extends React.PureComponent {
   handleVideoCoverPress = () => {
     this.setState(state => ({
       showControl: !state.showControl
-    }))
+    }));
   };
   
   handleVideoIconPress = () => {
     this.setState(state => ({
       paused: !state.paused
-    }))
+    }));
+  }
+
+  handleError = ({error}) => {
+    this.setState({ error });
   }
 
   render() {
-    let width = '100%';
-    let height = '100%';
-
-    const { url } = this.props;
-
+    const { 
+      url,
+      style,
+    } = this.props;
+    
     const { 
       buffering, 
       orientation, 
@@ -125,16 +154,19 @@ class VideoPlayer extends React.PureComponent {
       progress,
       duration,
       showControl,
+      error,
     } = this.state;
 
-    if (orientation === 'PORTRAIT') {
-      let { width: screenWidth } = Dimensions.get("window");
-      width = 0.8 * screenWidth;
-      height = 0.5625 * width;
-    }
+    let { width, height } = Dimensions.get("screen");
+
+    const containerStyles = [
+      styles.viewContainer,
+      style,
+      orientation === 'LANDSCAPE' ? { width, height } : null
+    ];
 
     return (
-      <View style={[styles.viewContainer, {width, height}]}>
+      <View style={containerStyles}>
         <View style={styles.videoContainer}>
           <Video
             paused={paused}
@@ -145,8 +177,15 @@ class VideoPlayer extends React.PureComponent {
             onLoad={this.handleLoad}
             onProgress={this.handleProgress}
             onEnd={this.handleEnd}
+            onError={this.handleError}
             ref={ref => { this.player = ref; }}
           />
+
+          {error && (
+            <View style={styles.videoError}>
+              <Text style={styles.textError}>{error.errorString}</Text>
+            </View>
+          )}
 
           <TouchableWithoutFeedback onPress={this.handleVideoCoverPress}>
             <View style={styles.videoCover}>

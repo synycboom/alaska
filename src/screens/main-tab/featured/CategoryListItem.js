@@ -2,8 +2,8 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { View, Text } from 'native-base';
 import CourseList from './CourseList';
-import { apis } from 'Alaska/src/apis';
 import { GREY, FONT_MEDIUM } from 'Alaska/src/theme';
+import CourseService from '../../../apis/CourseService';
 
 const style = StyleSheet.create({
   container: {
@@ -21,10 +21,11 @@ class CategoryListItem extends React.PureComponent {
     isLoading: true,
     courses: [],
   }
+  courseService = new CourseService();
 
   fetchData = async () => {
     const { categoryId } = this.props;
-    const response = await apis.course.getCourses({ category: categoryId });
+    const response = await this.courseService.getCourses({ category: categoryId });
     this.setState({ courses: response.data });
   }
 

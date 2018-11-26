@@ -11,7 +11,7 @@ const AppStack = createStackNavigator({
   MainTab: MainTabScreen,
   PurchaseCourse: PurchaseCourseScreen
 }, {
-  initialRouteName: 'PurchaseCourse',
+  initialRouteName: 'MainTab',
   headerMode: 'none',
 });
 

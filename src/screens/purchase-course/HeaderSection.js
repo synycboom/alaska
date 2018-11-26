@@ -1,8 +1,13 @@
 import React from 'react';
 import {
   StyleSheet,
-  ImageBackground
+  ImageBackground,
+  TouchableOpacity,
 } from 'react-native';
+
+import {
+  withNavigation
+} from 'react-navigation';
 
 import {
   Text,
@@ -21,7 +26,6 @@ import {
 const style = StyleSheet.create({
   imageBackground: {
     width: '100%',
-    height: '100%',
     position: 'relative',
   },
   viewContainer: {
@@ -32,13 +36,13 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
-  textName: {
+  textTitle: {
     fontSize: FONT_LARGER,
     color: WHITE,
     fontWeight: 'bold',
     marginLeft: 10,
   },
-  textDescription: {
+  textHeadline: {
     fontSize: FONT_MEDIUM,
     color: WHITE,
     marginLeft: 10,
@@ -54,20 +58,26 @@ const style = StyleSheet.create({
     fontSize: FONT_SMALL,
     color: WHITE,
   },
-  iconBack: {
+  iconBackContainer: {
     position: 'absolute',
     top: 5,
     left: 5,
+  },
+  iconBack: {
     color: SILVER,
   },
 });
 
 class HeaderSection extends React.PureComponent {
+  handleBack = () => {
+    this.props.navigation.goBack();
+  }
+
   render() {
     const {
       image,
-      name,
-      description,
+      title,
+      headline,
       videoLength,
       instructorName,
     } = this.props;
@@ -75,8 +85,8 @@ class HeaderSection extends React.PureComponent {
     return (
       <ImageBackground source={{uri: image}} style={style.imageBackground}>
         <View style={style.viewContainer}>
-          <Text style={style.textName}>{name}</Text>
-          <Text style={style.textDescription}>{description}</Text>
+          <Text style={style.textTitle}>{title}</Text>
+          <Text style={style.textHeadline}>{headline}</Text>
           <View style={style.viewTags}>
             <View style={style.tag}>
               <Text style={style.textTag}>{videoLength}</Text>
@@ -86,14 +96,16 @@ class HeaderSection extends React.PureComponent {
             </View>
           </View>
         </View>
-        <Icon
-          style={style.iconBack}
-          name='chevron-left' 
-          type='Entypo'
-        />
+        <TouchableOpacity style={style.iconBackContainer} onPress={this.handleBack}>
+          <Icon
+            style={style.iconBack}
+            name='chevron-left' 
+            type='Entypo'
+          />
+        </TouchableOpacity>
       </ImageBackground>
     );
   }
 }
 
-export default HeaderSection;
+export default withNavigation(HeaderSection);

@@ -1,11 +1,11 @@
 import React from 'react';
 import { RefreshControl, StyleSheet } from 'react-native';
 import { Icon, Text, Container, Content } from 'native-base';
-import { apis } from 'Alaska/src/apis';
 import theme, {
   SILVER
 } from 'Alaska/src/theme';
 import CategoryList from './CategoryList';
+import CategoryService from '../../../apis/CategoryService';
 
 const style = StyleSheet.create({
   container: {
@@ -36,28 +36,27 @@ class FeaturedScreen extends React.PureComponent {
     categories: [],
   }
 
+  categoryService = new CategoryService();
+
   async componentDidMount() {
     this.fetchData()
   }
 
   fetchData = async () => {
-    let nextState;
     this.setState({ isLoading: true });
-
-    try {
-      const response = await apis.category.getCategories();
-      nextState = {
-        isLoading: false,
-        categories: response.data,
-      };
-    } catch(error) {
-      nextState = {
-        isLoading: false,
-        error: 'Something went wrong!'
-      };
-    }
-
-    this.setState(nextState);
+    this.categoryService.getCategories()
+      .then(response => {
+        this.setState({
+          isLoading: false,
+          categories: response.data,
+        });    
+      })
+      .catch(error => {
+        this.setState({
+          isLoading: false,
+          error: 'Something went wrong!'
+        });
+      });
   }
 
   onRefresh = () => {

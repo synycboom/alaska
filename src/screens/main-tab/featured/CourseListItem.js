@@ -6,6 +6,7 @@ import {
 import { 
   View, 
   Text } from 'native-base';
+import { withNavigation } from 'react-navigation';
 import { 
   BLACK, 
   WHITE, 
@@ -41,7 +42,7 @@ const style = StyleSheet.create({
 
 class CourseListItem extends React.PureComponent {
   handleOnPress = () => {
-    
+    this.props.navigation.navigate('PurchaseCourse');
   }
 
   render() {
@@ -61,4 +62,4 @@ class CourseListItem extends React.PureComponent {
   }
 }
 
-export default CourseListItem;
+export default withNavigation(CourseListItem);
